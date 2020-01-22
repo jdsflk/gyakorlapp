@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginmodule/Screens/KahootQuestion.dart';
 
 class InClassRoom extends StatefulWidget {
   @override
@@ -13,7 +14,15 @@ class _InClassRoomState extends State<InClassRoom> {
         centerTitle: true,
         title: Text("A Classroom neve"), //TODO: read Firestore data
         leading:Padding(
-            padding: const EdgeInsets.only(left: 10.0), child: IconButton(icon: Icon(Icons.add), onPressed: null)),
+            padding: const EdgeInsets.only(left: 10.0),
+            child: IconButton(icon: Icon(Icons.add_circle_outline),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => KahootQuestion()
+                  )
+                  );
+                }
+                )
+        ),
         actions: <Widget>[
       Padding(
       padding: const EdgeInsets.only(right: 10.0),
