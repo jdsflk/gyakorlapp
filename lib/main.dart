@@ -5,8 +5,7 @@ import 'Screens/InClassroom.dart';
 void main(){
   runApp(MaterialApp(
       title: 'Login App',
-      home: InClassRoom(),
+      home: GoogleSignUp(),
   )
   );
 }
-//Szia

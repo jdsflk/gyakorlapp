@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginmodule/Screens/ScrollableClassrooms.dart';
 import 'package:loginmodule/Services/Auth.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 Widget changeScreen(){
   if(loggedIn){
@@ -35,7 +36,9 @@ class GoogleSignUp extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   authService.testSignInWithGoogle();
-                  Navigator.push(
+                  !loggedIn ? SpinKitRotatingCircle(
+                    color: Colors.white,
+                    size: 50.0,) : Navigator.push(
                       context,
                     MaterialPageRoute(
                         builder: (context) => ScrollableClassroom())
