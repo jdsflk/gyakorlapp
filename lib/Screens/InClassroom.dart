@@ -34,5 +34,7 @@ class _InClassRoomState extends State<InClassRoom> {
         width: MediaQuery.of(context).size.width,
       ),
     );
+
   }
+
 }

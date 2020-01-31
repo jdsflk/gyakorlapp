@@ -1,34 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loginmodule/UI/SimpleInputBox.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class KahootQuestion extends StatelessWidget {
+class KahootQuestion extends StatefulWidget {
   @override
+  _KahootQuestionState createState() => _KahootQuestionState();
+}
+
+class _KahootQuestionState extends State<KahootQuestion> {
+  @override
+  final myController = TextEditingController();
+
+  TextEditingController wrongController1 = TextEditingController();
+  TextEditingController wrongController2 = TextEditingController();
+  TextEditingController wrongController3 = TextEditingController();
+  TextEditingController correctController = TextEditingController();
+
+  SimpleInputBox wrongAns1;
+  SimpleInputBox wrongAns2;
+  SimpleInputBox wrongAns3;
+  SimpleInputBox correctAns;
+
+  @override
+  void initState(){
+    super.initState();
+    wrongAns1 = SimpleInputBox('Rossz válasz', 150, 150, Colors.blue, wrongController1);
+    wrongAns2 = SimpleInputBox('Rossz válasz', 150, 150, Colors.yellowAccent, wrongController2);
+    wrongAns3 = SimpleInputBox('Rossz válasz', 150, 150, Colors.green, wrongController3);
+    correctAns = SimpleInputBox('Jó Választ IDE!', 150, 150, Colors.red, correctController);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.blue,
-        child: Center(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
           child: Container(
-            width: 325,
-            height: 400,
+            color: Colors.blue,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             //color: Colors.redAccent,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Material(
-                  elevation: 10,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: 'Írd ide a kérdést!',
-                      hintStyle: TextStyle(
-                        fontSize: 20
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 10.0, left: 30.0, right: 30.0),
+                  child: Material(
+                    elevation: 10,
+                    child: TextField(
+                      controller: myController,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                          hintText: 'Írd ide a kérdést!',
+                          hintStyle: TextStyle(
+                              fontSize: 20
+                          ),
+                          border: InputBorder.none,
+                          fillColor: Colors.white,
+                          filled: true
                       ),
-                      border: InputBorder.none,
-                      fillColor: Colors.white,
-                      filled: true
                     ),
                   ),
                 ),
@@ -40,42 +88,62 @@ class KahootQuestion extends StatelessWidget {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: SimpleInputBox('A opció', 150, 150, Colors.red)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: correctAns
+                              ),
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: wrongAns1
+                              )
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceEvenly,
+                              children: <Widget>[
+                                Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: wrongAns2
                                 ),
-                            Align(
-                                alignment: Alignment.topRight,
-                                child: SimpleInputBox('B opció', 150, 150, Colors.blue)
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: SimpleInputBox('C opció', 150, 150, Colors.yellowAccent)
-                            ),
-                            Align(
-                                alignment: Alignment.bottomRight,
-                                child: SimpleInputBox('D opció', 150, 150, Colors.green)
-                            ),
-                          ]
-                        )
-                      ]
+                                Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: wrongAns3
+                                ),
+                              ]
+                          ),
+                        ]
                     ),
                   ),
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: IconButton(
+                      icon: Icon(Icons.save),
+                      iconSize: 50,
+                      color: Colors.black38,
+                      onPressed: () {
+                        Firestore.instance.collection("questions")
+                            .document()
+                            .setData(
+                            {
+                              "question": myController.text,
+                              "correctAns": correctController.text,
+                              "wrongAns1": wrongController1.text,
+                              "wrongAns2": wrongController2.text,
+                              "wrongAns3": wrongController3.text
+                            }
+                        );
+                      }),
+                ),
               ],
             ),
           ),
-        ),
-      ),
-    );
+        )
+    ));
   }
-
 }
+

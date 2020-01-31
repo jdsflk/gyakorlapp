@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginmodule/Screens/ScrollableClassrooms.dart';
 import 'package:loginmodule/Services/Auth.dart';
-
-Widget changeScreen(){
-  if(loggedIn){
-    return ScrollableClassroom();
-  }
-}
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loginmodule/UI/Loading.dart';
 
 class GoogleSignUp extends StatelessWidget {
   @override
@@ -33,13 +29,19 @@ class GoogleSignUp extends StatelessWidget {
                 ),
               ),
               RaisedButton(
-                onPressed: () {
+                onPressed: (){
                   authService.testSignInWithGoogle();
-                  Navigator.push(
+                  if(!authService.loggedIn){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Loading()));
+                  }
+                    Navigator.push(
                       context,
                     MaterialPageRoute(
                         builder: (context) => ScrollableClassroom())
-                  );},
+
+                    );
+                    },
                 elevation: 20.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
