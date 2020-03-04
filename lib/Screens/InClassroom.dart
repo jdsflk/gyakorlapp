@@ -10,10 +10,6 @@ String _csempe(BuildContext context, DocumentSnapshot snap) {
   return snap["Name"];
 }
 
-void display(qId, context) {
-  var v = Firestore.instance.collection("questions").snapshots();
-}
-
 //THX Atul Sharma
 void getData() {
   databaseReference.getDocuments().then((QuerySnapshot snapshot) {
@@ -62,8 +58,9 @@ class _InClassRoomState extends State<InClassRoom> {
                   icon: Icon(Icons.play_arrow),
                   color: Colors.white70,
                   onPressed: () {
-                    display("EjXbMNXX01HlxsB1vF2F", context);
-                  }))
+                  }
+                  )
+          )
         ],
       ),
     );

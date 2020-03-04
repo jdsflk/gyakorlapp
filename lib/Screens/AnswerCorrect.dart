@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String csokiropiszotyi(correct){
+String cw(correct){
   String displayText;
   if(correct){
     displayText = "Helyes!";
@@ -52,7 +52,7 @@ class _AnswerCorrectState extends State<AnswerCorrect> {
               width: 300,
               height: 200,
                 child: Text(
-                  csokiropiszotyi(widget.correct),
+                  cw(widget.correct),
                   style: TextStyle(
                     fontSize: 75,
                   ),
