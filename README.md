@@ -1,6 +1,6 @@
-# loginmodule
+# gyakorlapp
 
-A new Flutter module.
+A new Flutter application.
 
 ## Getting Started
 
