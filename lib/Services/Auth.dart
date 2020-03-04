@@ -47,8 +47,6 @@ class AuthService {
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
 
-    loggedIn = true;
-
     updateUserData(user);
 
     return 'signInWithGoogle succeeded: $user';
@@ -65,13 +63,11 @@ class AuthService {
       'photoURL': user.photoUrl,
       'displayName': user.displayName,
       'lastSeen': DateTime.now(),
-      'loggedIn': loggedIn,
     }, merge: true);
   }
 
   void signOut() {
     _auth.signOut();
-    loggedIn = false;
   }
 }
 
