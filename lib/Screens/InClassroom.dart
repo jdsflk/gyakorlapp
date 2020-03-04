@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loginmodule/Screens/KahootQuestion.dart';
-import 'package:loginmodule/Screens/rdhvtjzbku.dart';
-
 
 import 'Valaszolo.dart';
 
