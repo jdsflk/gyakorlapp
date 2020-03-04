@@ -4,17 +4,19 @@ import 'package:loginmodule/Screens/KahootQuestion.dart';
 
 import 'Valaszolo.dart';
 
-final databaseReference = Firestore.instance.collection("classrooms");
+final databaseReference = Firestore.instance.collection("questions");
+var data = new Map<String, dynamic>();
 
-String _csempe(BuildContext context, DocumentSnapshot snap) {
+String _title(BuildContext context, DocumentSnapshot snap) {
   return snap["Name"];
 }
 
-//THX Atul Sharma
 void getData() {
   databaseReference.getDocuments().then((QuerySnapshot snapshot) {
-    snapshot.documents.forEach((f) => print('${f.data["Name"]}}'));
-  });
+    snapshot.documents.forEach((f) => data = f.data);
+  }
+  );
+  print(data);
 }
 
 class InClassRoom extends StatefulWidget {
@@ -37,7 +39,7 @@ class _InClassRoomState extends State<InClassRoom> {
             if (!snapshot.hasData) {
               return const Text("Loading");
             }
-            return Text(_csempe(context, snapshot.data));
+            return Text(_title(context, snapshot.data));
           },
         ),
         leading: Padding(
@@ -58,6 +60,7 @@ class _InClassRoomState extends State<InClassRoom> {
                   icon: Icon(Icons.play_arrow),
                   color: Colors.white70,
                   onPressed: () {
+                    getData();
                   }
                   )
           )
