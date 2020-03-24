@@ -70,6 +70,7 @@ class _InClassRoomState extends State<InClassRoom> {
                     getData();
                     print(adatok[0]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
                     print(adatok.length); //Itt pedig az elsőnél 0 lesz, a második megnyomás után fogja felvenni a jó értéket.
+
                   }
                   )
           )
