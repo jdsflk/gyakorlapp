@@ -7,7 +7,7 @@ import 'package:loginmodule/Screens/ScrollableClassrooms.dart';
 void main(){
   runApp(MaterialApp(
       title: 'Login App',
-      home: KahootQuestion(),
+      home: GoogleSignUp(),
   )
   );
 }

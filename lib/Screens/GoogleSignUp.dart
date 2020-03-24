@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loginmodule/Screens/KahootQuestion.dart';
 import 'package:loginmodule/Screens/ScrollableClassrooms.dart';
 import 'package:loginmodule/Services/Auth.dart';
 
@@ -33,7 +34,7 @@ class GoogleSignUp extends StatelessWidget {
                   Navigator.push(
                       context,
                     MaterialPageRoute(
-                        builder: (context) => ScrollableClassroom())
+                        builder: (context) => KahootQuestion())
                   );},
                 elevation: 20.0,
                 shape: RoundedRectangleBorder(

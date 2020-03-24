@@ -1,22 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loginmodule/Screens/KahootQuestion.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'Valaszolo.dart';
 
 final databaseReference = Firestore.instance.collection("questions");
 var data = new Map<String, dynamic>();
 
+//Ebben tároljuk a Firestoreból érkező kérdéseket.
+List adatok = [];
+
 String _title(BuildContext context, DocumentSnapshot snap) {
   return snap["Name"];
 }
 
-void getData() {
+Future<void> getData(){
   databaseReference.getDocuments().then((QuerySnapshot snapshot) {
-    snapshot.documents.forEach((f) => data = f.data);
-  }
+    snapshot.documents.forEach((f){
+      data = f.data;
+      adatok.add(data);
+        }
+      );
+    }
   );
-  print(data);
 }
 
 class InClassRoom extends StatefulWidget {
@@ -61,6 +68,8 @@ class _InClassRoomState extends State<InClassRoom> {
                   color: Colors.white70,
                   onPressed: () {
                     getData();
+                    print(adatok[0]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
+                    print(adatok.length); //Itt pedig az elsőnél 0 lesz, a második megnyomás után fogja felvenni a jó értéket.
                   }
                   )
           )
