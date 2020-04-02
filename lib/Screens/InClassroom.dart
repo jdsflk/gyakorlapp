@@ -15,14 +15,12 @@ String _title(BuildContext context, DocumentSnapshot snap) {
   return snap["Name"];
 }
 
-Future<void> getData(){
-  databaseReference.getDocuments().then((QuerySnapshot snapshot) {
+Future<void> getData() async{
+  QuerySnapshot snapshot = await databaseReference.getDocuments();
     snapshot.documents.forEach((f){
       data = f.data;
       adatok.add(data);
         }
-      );
-    }
   );
 }
 
@@ -66,12 +64,11 @@ class _InClassRoomState extends State<InClassRoom> {
               child: IconButton(
                   icon: Icon(Icons.play_arrow),
                   color: Colors.white70,
-                  onPressed: () {
-                    getData();
-                    print(adatok[0]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
+                  onPressed: () async{
+                    await getData();
+                    print(adatok); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
                     print(adatok.length); //Itt pedig az elsőnél 0 lesz, a második megnyomás után fogja felvenni a jó értéket.
-
-                  }
+                    }
                   )
           )
         ],
