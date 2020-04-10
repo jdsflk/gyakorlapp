@@ -25,7 +25,6 @@ class Valaszolo extends StatefulWidget {
 
 class _ValaszoloState extends State<Valaszolo> {
 
-
   @override
   Widget build(BuildContext context) {
     widget.answers.shuffle();
