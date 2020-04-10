@@ -60,6 +60,7 @@ class _InClassRoomState extends State<InClassRoom> {
                 })),
         actions: <Widget>[
           Padding(
+
               padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(
                   icon: Icon(Icons.play_arrow),
