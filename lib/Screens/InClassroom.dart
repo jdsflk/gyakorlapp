@@ -66,14 +66,15 @@ class _InClassRoomState extends State<InClassRoom> {
                   color: Colors.white70,
                   onPressed: () async{
                     await getData();
-                    print(adatok);
-                    print(adatok[1]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
-                    var splitted = adatok[1].toString().substring(1, adatok[1].toString().length-1).split(",");
+                    print(adatok.length);
+                    for(int k = 0; k < adatok.length; k++){
+                    print(adatok[k]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
+                   var splitted = adatok[k].toString().substring(1, adatok[k].toString().length-1).split(",");
                     for(int i = 0; i < splitted.length; i++){
                       splitted[i] = splitted[i].split(":")[1].toString();
                       print(splitted[i]);
                     }
-                    print(splitted);
+                    }
                     }
                   )
           )

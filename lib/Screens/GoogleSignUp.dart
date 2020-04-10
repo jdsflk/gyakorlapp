@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loginmodule/Screens/InClassroom.dart';
 import 'package:loginmodule/Screens/KahootQuestion.dart';
 import 'package:loginmodule/Screens/ScrollableClassrooms.dart';
 import 'package:loginmodule/Services/Auth.dart';
@@ -9,7 +10,7 @@ class GoogleSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(200, 10, 25, 50),
+      backgroundColor: Colors.blueAccent,
       body: Center(
         child: Container(
           child: Column(
@@ -29,12 +30,13 @@ class GoogleSignUp extends StatelessWidget {
                 ),
               ),
               RaisedButton(
-                onPressed: () {
+                onPressed: ()async  {
                   authService.testSignInWithGoogle();
+                  await
                   Navigator.push(
                       context,
                     MaterialPageRoute(
-                        builder: (context) => KahootQuestion())
+                        builder: (context) => InClassRoom())
                   );},
                 elevation: 20.0,
                 shape: RoundedRectangleBorder(
