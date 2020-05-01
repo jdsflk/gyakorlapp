@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:loginmodule/Screens/AnswerCorrect.dart';
 
+
 bool JoValasz(String pressed, String correct){
   if(pressed == correct){
     return true;
@@ -13,11 +14,13 @@ bool JoValasz(String pressed, String correct){
 
 class Valaszolo extends StatefulWidget {
 
-  String question;
-  String correctAns;
-  List<String> answers;
+  List<String> question;
+  List<String> correctAns;
+  List<String> ros1;
+  List<String> ros2;
+  List<String> ros3;
 
-  Valaszolo(this.question, this.correctAns, this.answers);
+  Valaszolo(this.question, this.correctAns, this.ros1, this.ros2, this.ros3,);
 
   @override
   _ValaszoloState createState() => _ValaszoloState();

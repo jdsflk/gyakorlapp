@@ -74,13 +74,42 @@ class _InClassRoomState extends State<InClassRoom> {
                     await getData();
                     print(adatok.length);
                     for(int k = 0; k < adatok.length; k++){
-                    print(adatok[k]);
+                   // print(adatok[k]);
+                    int x=0;
                    var splitted = adatok[k].toString().substring(1, adatok[k].toString().length-1).split(",");
                     for(int i = 0; i < splitted.length; i++){
                       splitted[i] = splitted[i].split(":")[1].toString();
-                      print(splitted[i]);
+                      //print(splitted[i]);
+                      if (x==0){
+                        ros1.add(splitted[i]);
+                      }
+                      if (x==1){
+                        ros2.add(splitted[i]);
+                      }
+                      if (x==2){
+                        ros3.add(splitted[i]);
+                      }
+                      if (x==3){
+                        quest.add(splitted[i]);
+                      }
+                      if (x==4){
+                        jo.add(splitted[i]);
+                        x=0;
+                      }
+                      x++;
+
                     }
+
                     }
+                    print(ros1);
+                    print(ros2);
+                    print(ros3);
+                    print(jo);
+                    print(quest);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Valaszolo());
                     }
                   )
           )
