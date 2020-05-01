@@ -10,6 +10,12 @@ var data = new Map<String, dynamic>();
 
 //Ebben tároljuk a Firestoreból érkező kérdéseket.
 List adatok = [];
+List quest = [];
+List jo = [];
+List ros1 = [];
+List ros2 = [];
+List ros3 = [];
+
 
 String _title(BuildContext context, DocumentSnapshot snap) {
   return snap["Name"];
@@ -60,7 +66,6 @@ class _InClassRoomState extends State<InClassRoom> {
                 })),
         actions: <Widget>[
           Padding(
-
               padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(
                   icon: Icon(Icons.play_arrow),
@@ -69,7 +74,7 @@ class _InClassRoomState extends State<InClassRoom> {
                     await getData();
                     print(adatok.length);
                     for(int k = 0; k < adatok.length; k++){
-                    print(adatok[k]); //Ha lefuttatod a kódot, akkkor az első megnyomáskor ez hibát ad, a másodiknál fog jól működni.
+                    print(adatok[k]);
                    var splitted = adatok[k].toString().substring(1, adatok[k].toString().length-1).split(",");
                     for(int i = 0; i < splitted.length; i++){
                       splitted[i] = splitted[i].split(":")[1].toString();
